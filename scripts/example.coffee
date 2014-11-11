@@ -10,8 +10,17 @@
 
 module.exports = (robot) ->
 
-  # robot.hear /badger/i, (msg) ->
-  #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
+  robot.hear /@(.*)\+\+/i, (msg) ->
+     user = msg.match[1]
+     count = (robot.brain.get(user) or 0) + 1
+     robot.brain.set user, count
+     msg.send "@#{user}++ [woot! now at #{count}]"
+  
+  robot.hear /@(.*)\-\-/i, (msg) ->
+     user = msg.match[1]
+     count = (robot.brain.get(user) or 0) - 1
+     robot.brain.set user, count
+     msg.send "@#{user}-- [ouch! now at #{count}]"
   #
   # robot.respond /open the (.*) doors/i, (msg) ->
   #   doorType = msg.match[1]
