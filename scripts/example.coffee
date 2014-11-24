@@ -10,13 +10,13 @@
 
 module.exports = (robot) ->
 
-  robot.hear /@(.*)\+\+/i, (msg) ->
+  robot.hear /@([^\s]*)\+\+/i, (msg) ->
      user = msg.match[1]
      count = (robot.brain.get(user) or 0) + 1
      robot.brain.set user, count
      msg.send "@#{user}++ [woot! now at #{count}]"
   
-  robot.hear /@(.*)\-\-/i, (msg) ->
+  robot.hear /@([^\s]*)\-\-/i, (msg) ->
      user = msg.match[1]
      count = (robot.brain.get(user) or 0) - 1
      robot.brain.set user, count
