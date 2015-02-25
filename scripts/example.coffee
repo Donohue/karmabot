@@ -33,7 +33,13 @@ module.exports = (robot) ->
         msg.send "The lack of karma is too damn high!"
 
      tuples.sort (a, b) ->
-        return a[1] < b[1]? -1: (a[1] > b[1]? 1: 0)
+        if a[1] > b[1]
+           return -1
+        else if a[1] < b[1]
+           return 1
+        else
+           return 0
+
      for i in [0...Math.min(3, tuples.length)]
         username = tuples[i][0]
         points = tuples[i][1]
