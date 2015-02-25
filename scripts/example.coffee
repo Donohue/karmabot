@@ -9,6 +9,7 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
+  botname = process.env.HUBOT_SLACK_BOTNAME
 
   robot.hear /@([^\s]*)\+\+/i, (msg) ->
      user = msg.match[1]
@@ -21,6 +22,24 @@ module.exports = (robot) ->
      count = (robot.brain.get(user) or 0) - 1
      robot.brain.set user, count
      msg.send "@#{user}-- [ouch! now at #{count}]"
+
+  robot.hear /// #{botname} \s+ leaderboard ///i, (msg) ->
+     users = robot.brain.data._private
+     tuples = []
+     for username, score of users
+        tuples.push([username, score])
+
+     if tuples.length == 0
+        msg.send "The lack of karma is too damn high!"
+
+     tuples.sort (a, b) ->
+        return a[1] < b[1]? -1: (a[1] > b[1]? 1: 0)
+     for i in [0...Math.min(3, tuples.length)]
+        username = tuples[i][0]
+        points = tuples[i][1]
+        point_label = if points == 1 then "point" else "points"
+        leader = if i == 0 then "All hail supreme leader!" else ""
+        msg.send "##{i+1} @#{username} [#{points} " + point_label + "] " + leader
   #
   # robot.respond /open the (.*) doors/i, (msg) ->
   #   doorType = msg.match[1]
