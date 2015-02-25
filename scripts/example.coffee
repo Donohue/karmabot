@@ -31,6 +31,7 @@ module.exports = (robot) ->
 
      if tuples.length == 0
         msg.send "The lack of karma is too damn high!"
+        return
 
      tuples.sort (a, b) ->
         if a[1] > b[1]
@@ -40,12 +41,16 @@ module.exports = (robot) ->
         else
            return 0
 
+     str = ''
      for i in [0...Math.min(3, tuples.length)]
         username = tuples[i][0]
         points = tuples[i][1]
         point_label = if points == 1 then "point" else "points"
         leader = if i == 0 then "All hail supreme leader!" else ""
-        msg.send "##{i+1} @#{username} [#{points} " + point_label + "] " + leader
+        newline = if i < Math.min(3, tuples.length) - 1 then '\n' else ''
+        str += "##{i+1} @#{username} [#{points} " + point_label + "] " + leader + newline
+     msg.send(str)
+
   #
   # robot.respond /open the (.*) doors/i, (msg) ->
   #   doorType = msg.match[1]
