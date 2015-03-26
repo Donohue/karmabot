@@ -11,13 +11,13 @@
 module.exports = (robot) ->
   botname = process.env.HUBOT_SLACK_BOTNAME
 
-  robot.hear /@([a-z0-9_\-\.]*)\+{2,}/i, (msg) ->
+  robot.hear /@([a-z0-9_\-\.]+)\+{2,}/i, (msg) ->
      user = msg.match[1].replace(/\-+$/g, '')
      count = (robot.brain.get(user) or 0) + 1
      robot.brain.set user, count
      msg.send "@#{user}++ [woot! now at #{count}]"
   
-  robot.hear /@([a-z0-9_\-\.]*)\-{2,}/i, (msg) ->
+  robot.hear /@([a-z0-9_\-\.]+)\-{2,}/i, (msg) ->
      user = msg.match[1].replace(/\-+$/g, '')
      count = (robot.brain.get(user) or 0) - 1
      robot.brain.set user, count
