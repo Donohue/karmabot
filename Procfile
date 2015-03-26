@@ -1,1 +1,1 @@
-web: bin/hubot -a slack -n karmabot
+web: bin/hubot -a slack
