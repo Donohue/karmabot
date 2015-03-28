@@ -5,12 +5,13 @@
   "author": "brian@betaworks.com",
   "description": "Upvote for awesome, downvote for foolish",
   "dependencies": {
+    "hubot": "^2.11.4",
     "hubot-diagnostics": "0.0.1",
     "hubot-heroku-keepalive": "0.0.4",
-    "hubot-slack": "~2.2.0",
     "hubot-redis-brain": "0.0.2",
-    "hubot-scripts": "~2.5.16",
-    "hubot": "~2.9.3"
+    "hubot-rules": "^0.1.0",
+    "hubot-scripts": "^2.5.16",
+    "hubot-slack": "^3.3.0"
   },
   "engines": {
     "node": "0.10.x"
