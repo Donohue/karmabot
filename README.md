@@ -1,6 +1,6 @@
-# hubot-slack
+# karmabot
 
-This is a [Hubot](http://hubot.github.com/) adapter to use with [Slack](https://slack.com).
+Karmabot is a chat bot built on the [Hubot](http://hubot.github.com/) framework for use with [Slack](https://slack.com). 
 
 ## Getting Started
 
