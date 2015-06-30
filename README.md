@@ -1,5 +1,7 @@
 # karmabot
 
+![Karmabot screenshot](/karmabot.png "Karmabot in action")
+
 Karmabot is a chat bot built on the [Hubot](http://hubot.github.com/) framework for use with [Slack](https://slack.com). 
 
 ## Getting Started
