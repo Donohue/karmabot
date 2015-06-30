@@ -2,7 +2,7 @@
 
 ![Karmabot screenshot](/karmabot.png "Karmabot in action")
 
-Karmabot is a chat bot built on the [Hubot](http://hubot.github.com/) framework for use with [Slack](https://slack.com). 
+Karmabot is a bot for upvoting and downvoting people in your [Slack](https://slack.com) room. It's built on the [Hubot](http://hubot.github.com/) framework for use with [Slack](https://slack.com). 
 
 ## Getting Started
 
