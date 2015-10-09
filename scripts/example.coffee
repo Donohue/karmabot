@@ -10,19 +10,24 @@
 
 module.exports = (robot) ->
   botname = process.env.HUBOT_SLACK_BOTNAME
-
-  robot.hear /@([a-z0-9_\-\.]+)\+{2,}/i, (msg) ->
-     user = msg.match[1].replace(/\-+$/g, '')
-     count = (robot.brain.get(user) or 0) + 1
-     robot.brain.set user, count
-     msg.send "@#{user}++ [woot! now at #{count}]"
+  plusplus_re = /@([a-z0-9_\-\.]+)\+{2,}/ig
+  minusminus_re = /@([a-z0-9_\-\.]+)\-{2,}/ig
+  plusplus_minusminus_re = /@([a-z0-9_\-\.]+)[\+\-]{2,}/ig
   
-  robot.hear /@([a-z0-9_\-\.]+)\-{2,}/i, (msg) ->
-     user = msg.match[1].replace(/\-+$/g, '')
-     count = (robot.brain.get(user) or 0) - 1
-     robot.brain.set user, count
-     msg.send "@#{user}-- [ouch! now at #{count}]"
-
+  robot.hear plusplus_minusminus_re, (msg) ->
+     res = ''
+     while (match = plusplus_re.exec(msg.message))
+         user = match[1].replace(/\-+$/g, '')
+         count = (robot.brain.get(user) or 0) + 1
+         robot.brain.set user, count
+         res += "@#{user}++ [woot! now at #{count}]\n"
+     while (match = minusminus_re.exec(msg.message))
+         user = match[1].replace(/\-+$/g, '')
+         count = (robot.brain.get(user) or 0) - 1
+         robot.brain.set user, count
+         res += "@#{user}-- [ouch! now at #{count}]\n"
+     msg.send res.replace(/\s+$/g, '')
+  
   robot.hear /// #{botname} \s+ leaderboard ///i, (msg) ->
      users = robot.brain.data._private
      tuples = []
