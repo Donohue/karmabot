@@ -47,7 +47,7 @@ module.exports = (robot) ->
            return 0
 
      str = ''
-     for i in [0...Math.min(3, tuples.length)]
+     for i in [0...Math.min(5, tuples.length)]
         username = tuples[i][0]
         points = tuples[i][1]
         point_label = if points == 1 then "point" else "points"
