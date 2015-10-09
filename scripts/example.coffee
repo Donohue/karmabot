@@ -27,7 +27,16 @@ module.exports = (robot) ->
          robot.brain.set user, count
          res += "@#{user}-- [ouch! now at #{count}]\n"
      msg.send res.replace(/\s+$/g, '')
-  
+
+  robot.hear /// #{botname} \s+ @([a-z0-9_\-\.]+) ///i, (msg) ->
+     user = msg.match[1].replace(/\-+$/g, '')
+     count = robot.brain.get(user)
+     if count != null
+         point_label = if count == 1 then "point" else "points"
+         msg.send "@#{user}: #{count} " + point_label
+     else
+         msg.send "@#{user} has no karma"
+
   robot.hear /// #{botname} \s+ leaderboard ///i, (msg) ->
      users = robot.brain.data._private
      tuples = []
