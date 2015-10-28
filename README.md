@@ -22,7 +22,7 @@ This is a modified set of instructions based on the [Slack hubot-slack repo](htt
 
         % heroku config:add HUBOT_SLACK_TOKEN=xoxb-1234-5678-91011-00e4dd
         % heroku config:add HUBOT_SLACK_BOTNAME=karmabot
-        % heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web_url | cut -d= -f2)
+        % heroku config:set HUBOT_HEROKU_KEEPALIVE_URL=$(heroku apps:info -s  | grep web-url | cut -d= -f2)
                  
 - Deploy and start the bot:
 
